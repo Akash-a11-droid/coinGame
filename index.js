@@ -41,7 +41,6 @@ window.addEventListener('keydown', function(e) {
         scoreUpdate();
         moveCoin(Math.floor(Math.random() * 4));
     }
-
 });
 
 function moveAvatarDown() {
