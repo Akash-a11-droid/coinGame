@@ -13,7 +13,7 @@ let avatarLeftInteger = parseInt(avatar.style.left, 10);
 
 //Setting Initial position of the coin
 coin.style.top = `${Math.floor(Math.random() * window.innerHeight)}px`;
-coin.style.left = `${Math.floor(Math.random() * window.innerWidth)}px`;
+coin.style.left = `${Math.floor(Math.random() * document.body.clientWidth)}px`;
 
 let avatarMoved = false;
 
@@ -39,8 +39,9 @@ window.addEventListener('keydown', function(e) {
     }
     if (avatarMoved && isTouching(avatar, coin)) {
         scoreUpdate();
-        moveCoin(Math.floor(Math.random() * 4));
+        moveCoin(Math.floor(Math.random() * 2));
     }
+
 });
 
 function moveAvatarDown() {
@@ -65,7 +66,7 @@ function moveAvatarLeft() {
 }
 
 function moveAvatarRight() {
-    if(avatarLeftInteger + 50 < window.innerWidth) {
+    if(avatarLeftInteger + 50 < document.body.clientWidth) {
         avatarLeftInteger += 50;
         avatar.style.left = `${avatarLeftInteger}px`;
     }
@@ -81,6 +82,7 @@ function isTouching(a, b) {
         aRect.left + aRect.width < bRect.left ||  //aRect is at the left side of bRect
         bRect.left + bRect.width < aRect.left   //bRect is at the left side of aRect
 
+        
         //This method 'isTouching' will return true only if all the above four conditions are false (or) not satisfied
     );  
 }
@@ -95,23 +97,13 @@ function moveCoin(randomVal) {
     let rVertical;
     switch(randomVal) {
         case 0:
-            //Moves the coin downwards
+            //Moves the coin vertically
             rHorizontal = Math.floor(Math.random() * window.innerHeight);
             coin.style.top = `${rHorizontal}px`;
             break;
         case 1:
-            //Moves the coin rightwards
-            rVertical = Math.floor(Math.random() * window.innerWidth);   
-            coin.style.left = `${rVertical}px`;
-            break;
-        case 2:
-            //Moves the coin upwards
-            rHorizontal = Math.floor(Math.random() * window.innerHeight);
-            coin.style.top = `${rHorizontal}px`;
-            break;
-        case 3:
-            //Moves the coin leftwards
-            rVertical = Math.floor(Math.random() * window.innerWidth);   
+            //Moves the coin horizontally
+            rVertical = Math.floor(Math.random() * document.body.clientWidth);   
             coin.style.left = `${rVertical}px`;
             break;
     }
